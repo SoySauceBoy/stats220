@@ -10,4 +10,4 @@
 
 https://www.youtube.com/
 
-A meme that captures how I currently feel about my university studies is ![](https://tenor.com/dwk8xBFjzAX.gif)
+A meme that captures how I currently feel about my university studies is ![]("C:\Users\jayde\Downloads\the-voices-meme.gif")
