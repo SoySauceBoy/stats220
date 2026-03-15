@@ -1,11 +1,13 @@
 # stats220
 
-# This is my repo for STATS 220. 
+# This is my repo for ** STATS 220 **. 
 
-## A little about me:
+## A little about * me *:
 
-- I am undertaking a degree in Computer Science
+* I am undertaking a degree in Computer Science
 - I am taking STATS 220 because data science is important and I think it's cool
-- I am interested in learning about how people obtain data and what they do with it
+3. I am interested in learning about how people obtain data and what they do with it
 
-A meme that captures how I currently feel about my university studies is\![](https://tenor.com/ixPDfBn9wTq.gif)
+https://www.youtube.com/
+
+A meme that captures how I currently feel about my university studies is\![](https://tenor.com/dwk8xBFjzAX.gif)
