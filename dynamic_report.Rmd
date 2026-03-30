@@ -1,0 +1,115 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+h2 {
+font-family: 'Tahoma';
+padding: 15px;
+color: #000000;
+text-align: center;
+}
+
+body {
+background-color: #edf4f2;
+color: #000000;
+font-size: 18px;
+}
+
+img {
+  display: block;
+  margin: 16px auto;
+}
+```
+
+## What apps are people using when they open their phones?
+
+This survey tracked observations of the first apps used when people open up their phones and the purpose behind why they opened their phones in the first place as well as the time spent on their phones while doing said activity.
+
+```{r}
+library(tidyverse)
+
+options(scipen = 999)
+
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTi8OcDqIiTnS37eRF-l1qUIuXkg6Dgaasf3GETIucqXC1jPpcGuyCWTtHwsWHP36DhJFdcigdWYDHM/pub?output=csv")
+latest_data <- logged_data %>%
+  rename(
+    uses_phone = 2,
+    purpose = 3,
+    app = 4,
+    time_spent = 5,
+    enjoyment = 6,
+  )
+
+# Getting summary data
+total_observations <- nrow(latest_data)
+time_spent <- latest_data$time_spent
+min_time <- min(time_spent)
+max_time <- max(time_spent)
+mean_time <- mean(time_spent)
+
+enjoyment <- latest_data$enjoyment
+min_enjoyment <- min(enjoyment)
+max_enjoyment <- max(enjoyment)
+mean_enjoyment <- mean(enjoyment)
+```
+
+Based on **`r total_observations`** observations of people using their phones the average time spent on each open of the phone was **`r format(round(mean_time), 1)`** minute(s) with the shortest time being **`r min_time`** minute(s) and the longest at **`r max_time`** minutes. The average enjoyment rating of the time spent on their phones was also recorded at **`r format(round(mean_enjoyment), 1)`** out of 5.
+
+
+
+```{r}
+# Finding the most common purpose and the count
+purposes <- latest_data %>%
+  count(purpose) %>%
+  slice_max(n)
+
+common_purpose <- purposes$purpose
+common_purpose_count <- purposes$n
+```
+
+The graph below shows the variety of purposes or reasons behind why someone used their phone. The most common purpose logged was **`r common_purpose`** at a total of **`r common_purpose_count`**.
+
+```{r}
+# Graph of the purposes
+ggplot(data = latest_data) + 
+  geom_bar(
+    aes(x = purpose, fill = purpose), show.legend = FALSE) +
+  labs(
+    title = "The purposes of opening the phone",
+    x = "Purposes",
+    y = "Count") +
+  theme_classic()
+
+# Finding the most common type of app used first
+app <- latest_data %>%
+  count(app) %>%
+  slice_max(n)
+
+common_app <- app$app
+common_app_count <- app$n
+
+```
+
+The graph below shows the different types of apps people first went to when they opened their phones. The most common type of app logged was **`r common_app`** at a total of **`r common_app_count`** times.
+
+```{r}
+# Graph of the apps
+ggplot(data = latest_data) + 
+  geom_bar(
+    aes(x = app, fill = app), show.legend = FALSE) +
+  labs(
+    title = "The apps used on first open",
+    x = "Apps",
+    y = "Count") +
+  theme_classic()
+
+```
+
+
